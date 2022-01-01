@@ -1,0 +1,21 @@
+
+
+.row{
+    display: flex;
+}
+
+.col{
+    flex-grow: 1;
+    margin-right: 5px;
+}
+
+button:hover{
+    background-color: aqua;
+}
+
+input{
+    display: block;
+    margin: 5px;
+}
+
+

@@ -1,0 +1,30 @@
+<div align = 'center'>
+    <p style = 'margin-bottom: 45px; margin-top: 70px;font-size: 27.5px;'>Bienvenido {{cliente}}</p>
+    <p style = 'margin-bottom: 45px; margin-top: 70px;font-size: 27.5px;' *ngIf = '!validado'>Su código caduca en {{segundos}} segundos</p>
+
+    <!-- <p><ngb-progressbar [value]=segundos type = "success"></ngb-progressbar></p> -->
+
+    <p style = 'margin-bottom: 75px; font-size: 35px; font-weight: bold;'>Código: {{respuesta}}</p>
+
+    
+
+    <form  (ngSubmit) = 'agregar()' *ngIf = '!validado'>
+        <input style = 'padding: 5px; font-size: 15px; font-size: 25px; border-radius: 7.5px;' required ngModel type = 'text' placeholder = 'Ingresar código' minlength="6" maxlength="6" [(ngModel)] = 'codigoUsuario' name = 'codigo'>
+        
+        <br>
+        <button style = 'margin-top: 25px;' type = 'submit' id = 'botonEnviar'>Enviar código</button>
+        <p style = 'font-size: 15px; font-weight: bold; color: red;' *ngIf = 'malDigito' >El código debe de tener 6 digitos</p>
+    </form>
+
+    <div *ngIf = 'validado'>
+        <img style = 'height: 250px; width: 250px;' src="https://previews.123rf.com/images/kongvector/kongvector1712/kongvector171201338/91360817-bien-ilustraci%C3%B3n-de-vector-de-estilo-de-dibujos-animados-de-cron%C3%B3metro-personaje.jpg">
+
+    </div>
+
+
+
+
+
+
+
+</div>
