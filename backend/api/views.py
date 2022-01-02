@@ -41,9 +41,11 @@ class TokenInformacion(APIView):
         segundos = time.mktime(dt.timetuple())
         data = json.loads(request.body)
         numero = rn.randint(100000, 999999)
-        TokenInfo.objects.create(cliente = data['cliente'], token = numero,  date = now, segundos = segundos )
+        TokenInfo.objects.create(cliente=data['cliente'], token=numero, date=now, segundos=segundos)
         jason = {'token': numero}
         return Response(data=jason)
+
+
 
 
 

@@ -8,12 +8,13 @@
 
     
 
-    <form  (ngSubmit) = 'agregar()' *ngIf = '!validado'>
-        <input style = 'padding: 5px; font-size: 15px; font-size: 25px; border-radius: 7.5px;' required ngModel type = 'text' placeholder = 'Ingresar código' minlength="6" maxlength="6" [(ngModel)] = 'codigoUsuario' name = 'codigo'>
+    <form  (ngSubmit) = 'validarCodigo()' *ngIf = '!validado'>
+        <input style = 'padding: 5px; font-size: 15px; font-size: 25px; border-radius: 7.5px;' required ngModel (ngModelChange)="cambiarEstado($event)" type = 'text' placeholder = 'Ingresar código' minlength="6" maxlength="6" [(ngModel)] = 'codigoUsuario' name = 'codigo' [value] = 'codigoUsuario'>
         
         <br>
         <button style = 'margin-top: 25px;' type = 'submit' id = 'botonEnviar'>Enviar código</button>
         <p style = 'font-size: 15px; font-weight: bold; color: red;' *ngIf = 'malDigito' >El código debe de tener 6 digitos</p>
+        <p style = 'font-size: 21.5px; font-weight: bold; color: red;' *ngIf = 'noValido' >Código no válido</p>
     </form>
 
     <div *ngIf = 'validado'>

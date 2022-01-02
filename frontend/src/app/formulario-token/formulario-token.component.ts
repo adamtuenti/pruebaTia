@@ -13,10 +13,11 @@ export class FormularioTokenComponent implements OnInit {
   tiempo = 25;
   activarBoton = false;
   codigoUsuario = '';
-  segundos = 25;
+  segundos: number;
   cliente: any;
   malDigito = false;
   validado = false;
+  noValido = false;
 
   constructor(private http: HttpClient, private router: Router, private activatedroute:ActivatedRoute, private config:NgbProgressbarConfig) {
     config.showValue=true,
@@ -24,13 +25,12 @@ export class FormularioTokenComponent implements OnInit {
     config.striped=true,
     config.animated=true
 
-    // this.segundos = 25;
+    this.segundos = 60;
     setInterval(() => this.reloj(), 1000)
   }
 
   ngOnInit() {
     this.cliente = this.activatedroute.snapshot.paramMap.get("cliente");
-    console.log('aqui')
     this.generarCodigo()
 
 
@@ -38,25 +38,27 @@ export class FormularioTokenComponent implements OnInit {
   }
 
   private reloj(): void{
-    console.log(this.segundos)
     if(this.segundos != -1){
       if(--this.segundos < 0){
-        this.segundos = 25;
+        this.segundos = 60;
         this.generarCodigo()
       }
     }
   }
 
-  agregar(){
-    console.log(this.codigoUsuario)
+  cambiarEstado(evento: any){
+    this.noValido = false;
+  }
+
+  validarCodigo(){
     if(this.codigoUsuario.length == 6){
         this.http.post<any>('http://127.0.0.1:8000/api/validarToken/', { tokenU: this.codigoUsuario, cliente: this.cliente}).subscribe({
           next: data => {
-              console.log(data)
-              alert(data)
               if(data == 'Token Valido'){
                 this.validado = true;
                 this.segundos = -1;
+              }else{
+                this.noValido = true;
               }
           },
           error: error => {
