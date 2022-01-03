@@ -6,7 +6,6 @@ from datetime import datetime
 import json
 import time
 import random as rn
-from rest_framework import viewsets
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.response import Response
@@ -17,21 +16,6 @@ class TokenInformacion(APIView):
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
-
-    # def get(self, request):
-    #     tokens = list(TokenInfo.objects.values())
-    #
-    #     now = datetime.now()
-    #     now = now.strftime("%Y/%m/%d %H:%M:%S")
-    #     dt = datetime.strptime(now, '%Y/%m/%d %H:%M:%S')
-    #
-    #     ts = time.mktime(dt.timetuple())
-    #     if(len(tokens) > 0):
-    #         datos = {'message': 'Correcto', 'Tokens': tokens}
-    #     else:
-    #         datos = {'message': 'Error'}
-    #
-    #     return JsonResponse(datos)
 
     @method_decorator(csrf_exempt)
     def post(self, request, *args, **kwargs):
@@ -44,8 +28,6 @@ class TokenInformacion(APIView):
         TokenInfo.objects.create(cliente=data['cliente'], token=numero, date=now, segundos=segundos)
         jason = {'token': numero}
         return Response(data=jason)
-
-
 
 
 

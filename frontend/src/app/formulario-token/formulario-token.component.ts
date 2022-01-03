@@ -24,7 +24,6 @@ export class FormularioTokenComponent implements OnInit {
     config.type="success",
     config.striped=true,
     config.animated=true
-
     this.segundos = 60;
     setInterval(() => this.reloj(), 1000)
   }
@@ -32,9 +31,6 @@ export class FormularioTokenComponent implements OnInit {
   ngOnInit() {
     this.cliente = this.activatedroute.snapshot.paramMap.get("cliente");
     this.generarCodigo()
-
-
-  
   }
 
   private reloj(): void{
@@ -70,14 +66,6 @@ export class FormularioTokenComponent implements OnInit {
     }else{
       this.malDigito = true;
     }
-
-
-
-     
-
-  
-    
-
   }
 
    
